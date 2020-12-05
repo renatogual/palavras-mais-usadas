@@ -65,6 +65,21 @@ function separarTextoPor(texto, simbolo) {
     return texto.split(simbolo)
 }
 
+function agruparPalavras(palavras) {
+    return Object.values(palavras.reduce((agrupadas, palavra) => {
+        let p = palavra.toLowerCase()
+        let qtde = agrupadas[p] ? agrupadas[p].qtde + 1 : 1
+        agrupadas[p] = { palavra: p, qtde: qtde }
+        return agrupadas
+    }, {}))
+}
+
+function ordenarPalavrasPorAttr(array, attr, ordem='asc') {
+    const asc = (el1, el2) => el1[attr] - el2[attr]
+    const desc = (el1, el2) => el2[attr] - el1[attr]
+    return array.sort(ordem === 'asc' ? asc : desc)
+}
+
 module.exports = {
     lerDiretorio,
     filtroExtensoes,
@@ -75,5 +90,7 @@ module.exports = {
     limparLinhasApenasNumeros,
     limparSimbolos,
     mesclarElementos,
-    separarTextoPor
+    separarTextoPor,
+    agruparPalavras,
+    ordenarPalavrasPorAttr
 }
