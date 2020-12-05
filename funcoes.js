@@ -80,6 +80,21 @@ function ordenarPalavrasPorAttr(array, attr, ordem='asc') {
     return array.sort(ordem === 'asc' ? asc : desc)
 }
 
+function transformarParaTexto(array) {
+    let texto = ''
+    array.map(linha => {
+        texto += `${linha.palavra} = ${linha.qtde} \n`
+    })
+    return texto
+}
+
+function salvarResultado(caminho, data) {
+    fs.writeFile(caminho, data, {encoding: 'utf-8', flag: 'w'}, (err) => {
+        if(err) return console.log(err);
+        return console.log('Arquivo salvo com sucesso!!!');
+    })
+}
+
 module.exports = {
     lerDiretorio,
     filtroExtensoes,
@@ -92,5 +107,7 @@ module.exports = {
     mesclarElementos,
     separarTextoPor,
     agruparPalavras,
-    ordenarPalavrasPorAttr
+    ordenarPalavrasPorAttr,
+    transformarParaTexto,
+    salvarResultado
 }

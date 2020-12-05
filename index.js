@@ -4,8 +4,6 @@ const simbolos = [
     '.', '?', '!', '-', ',', '"', '♪', '_', '\r', '(', ')', '[', ']', '<i>', '</i>'
 ]
 
-
-
 fn.lerDiretorio('./legendas')
     .then(arquivos => fn.filtroExtensoes(arquivos, '.srt'))
     .then(arquivoSRT => fn.lerArquivos(arquivoSRT))
@@ -21,4 +19,5 @@ fn.lerDiretorio('./legendas')
     .then(linhas => fn.limparLinhasApenasNumeros(linhas))
     .then(palavras => fn.agruparPalavras(palavras))
     .then(palavras => fn.ordenarPalavrasPorAttr(palavras, 'qtde', 'desc'))
-    .then(console.log)
+    .then(palavras => fn.transformarParaTexto(palavras))
+    .then(resultado => fn.salvarResultado(__dirname + '/resultado.txt', resultado))
